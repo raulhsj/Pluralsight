@@ -1,0 +1,47 @@
+# Pasos:
+# 1. Creación de usuario, grupo Admin en IAM. Hacer un aws configure para pasar las credenciales a ~/.aws/credentials
+# 2. Creación de bucket en s3
+# 3. Creación de zip y subida a bucket con:
+#   sam package --template-file sam-template.yaml --s3-bucket <nombre_bucket> --output-template-file sam-output-template.yaml
+#   en --output-template-file se creará un nodo CodeUri con la dirección del zip dentro del bucket
+# 4. sam deploy --template-file sam-output-template.yaml --stack-name <nombre_stack_cloud_cloudformation> --capabilities CAPABILITY_IA
+# 5. API Gateway -> Etapas -> Stage -> copiar la url y atacar con curl o postman
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  BookTable:
+    Type: AWS::Serverless::SimpleTable
+  Books:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs12.x
+      CodeUri: s3://raulhsj-artifacts-for-lambda/57dfa1ff4cf10a1cc74def4695128622
+      Handler: books.handler
+      Environment:
+        Variables:
+          TABLE_NAME:
+            Ref: BookTable
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        AddBook:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: post
+        ListBooks:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: get
+        Book:
+          Type: Api
+          Properties:
+            Path: /books/{id}
+            Method: any
+Globals:
+  Api:
+    Cors:  # si se quiere atacar desde localhost, hay que activar CORS
+      AllowMethods: '''*'''
+      AllowHeaders: '''*'''
+      AllowOrigin: '''*'''
