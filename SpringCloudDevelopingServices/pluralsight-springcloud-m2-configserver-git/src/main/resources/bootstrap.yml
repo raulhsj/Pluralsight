@@ -1,0 +1,10 @@
+#Quitamos encrypt y añadimos la configuración encrypt.enabled: false porque queremos que el cliente haga el encriptado/desencriptado de la configuración
+spring:
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: false
+
+#encrypt:
+#  key: ABCDEFGHIJKLMNOPQRSTUVWXYZ

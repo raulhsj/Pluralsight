@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: raulhsj
+Build-Jdk: 13.0.2
+Implementation-Title: pluralsight-springcloud-m5-customerservice
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: pluralsight.demo
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/pluralsight-sp
+ ringcloud-m5-customerservice/
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: pluralsight
+      password: pluralsight
+  
+encrypt:
+  key: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+# Exponiendo el endpoint /actuator/refresh. Antes hay que importar spring-boot-starter-actuator  
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - 'refresh'

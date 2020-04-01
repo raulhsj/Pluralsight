@@ -1,0 +1,17 @@
+spring:
+#  activemq:
+#    broker-url: tcp://127.0.0.1:5672
+
+# Las dos lineas de arriba no hace falta configurarlas porque, por defecto, la uri es localhost:5672
+  rabbitmq:
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: tasktopic
+logging:
+  level:
+    org.springframework.cloud.task: DEBUG
+    org.springframework.cloud.stream: DEBUG
